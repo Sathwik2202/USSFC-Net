@@ -1,9 +1,41 @@
 import torch.nn as nn
 import torch
 from thop import profile
-from torchsummary import summary
 
 from networks.modules.MSDConv_SSFC import MSDConv_SSFC
+
+
+class First_DoubleConv(nn.Module):
+    def __init__(self, in_ch, out_ch):
+        super(First_DoubleConv, self).__init__()
+        self.conv = nn.Sequential(
+            nn.Conv2d(in_ch, out_ch, kernel_size=3, padding=1),
+            nn.BatchNorm2d(out_ch),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(out_ch, out_ch, kernel_size=3, padding=1),
+            nn.BatchNorm2d(out_ch),
+            nn.ReLU(inplace=True)
+        )
+
+    def forward(self, input):
+        return self.conv(input)
+
+
+class DoubleConv(nn.Module):
+    def __init__(self, in_ch, out_ch):
+        super(DoubleConv, self).__init__()
+        self.Conv = nn.Sequential(
+            MSDConv_SSFC(in_ch, out_ch, dilation=3),
+            nn.BatchNorm2d(out_ch),
+            nn.ReLU(inplace=True),
+            MSDConv_SSFC(out_ch, out_ch, dilation=3),
+            nn.BatchNorm2d(out_ch),
+            nn.ReLU(inplace=True)
+        )
+
+    def forward(self, input):
+        return self.Conv(input)
+
 
 class USSFCNet(nn.Module):
     # Ratio 0.5 is the exact paper architecture yielding 1.52M active parameters
