@@ -1,6 +1,8 @@
 import torch
 import torch.nn as nn
 
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
 class CMConv(nn.Module):
     def __init__(self, in_ch, out_ch, kernel_size=3, stride=1, padding=1, dilation=3, groups=1, dilation_set=4, bias=False):
         super(CMConv, self).__init__()
@@ -8,7 +10,7 @@ class CMConv(nn.Module):
         self.prim_shift = nn.Conv2d(in_ch, out_ch, kernel_size, stride, padding=2*dilation, dilation=2*dilation, groups=groups*dilation_set, bias=bias)
         self.conv = nn.Conv2d(in_ch, out_ch, kernel_size, stride, padding, groups=groups, bias=bias)
         
-        self.mask = torch.zeros(self.conv.weight.shape).bool().to(device)
+        self.mask = torch.zeros(self.conv.weight.shape).byte().to(device)
         _in, _out = in_ch // (groups * dilation_set), out_ch // (groups * dilation_set)
         for i in range(dilation_set):
             for j in range(groups):
