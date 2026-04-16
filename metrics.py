@@ -1,6 +1,6 @@
-# ===========================================================================
-#  METRICS 
-# ===========================================================================
+import numpy as np
+
+
 def ConfusionMatrix(num_classes, pres, gts):
     def __get_hist(pre, gt):
         pre = pre.cpu().detach().numpy()
