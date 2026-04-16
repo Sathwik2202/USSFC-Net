@@ -5,12 +5,11 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
 import torchvision.transforms as transforms
-
+from paths import *
 from dataset import RsDataset
 from utils import train_epoch, val_epoch
-from model import USSFCNet, CMConv  # your model file
-
-# also import these if defined elsewhere
+from networks.USSFCNet import USSFCNet
+from networks.modules.CMConv import CMConv
 from metrics import ConfusionMatrix, get_score_sum
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -48,8 +47,8 @@ if __name__ == '__main__':
     # 4. Training Loop
     best_f1 = 0
     os.makedirs('ckps', exist_ok=True)
-
-    for epoch in range(200):
+    epochs  =2
+    for epoch in range(epochs):
         print(f'--- Epoch {epoch+1}/200 ---')
 
         loss, train_res = train_epoch(net, dl_train, crit, opt, device, ConfusionMatrix, get_score_sum)
