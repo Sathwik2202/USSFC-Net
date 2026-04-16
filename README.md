@@ -10,7 +10,7 @@ The code is configured for the **LEVIR-CD** dataset (building change detection) 
 
 - **`train.py`**: Entry point for training and validation.
 - **`paths.py`**: Dataset root and split paths (currently configured for LEVIR-CD).
-- **`dataset.py`**: Dataset loader that implements `RsDataset` class for loading paired remote sensing images (time t1 and t2) with corresponding change detection labels. Handles data augmentation and preprocessing for training and validation.
+- **`dataset.py`**: Dataset loader that implements `RsDataset` class for loading paired remote sensing images (time t1 and t2) with corresponding change detection labels.
 - **`networks/USSFCNet.py`**: Main network definition (USSFCNet, First_DoubleConv, DoubleConv).
 - **`networks/modules/CMConv.py`**: Channel-masked convolution (CMConv) used to build multi-scale features.
 - **`networks/modules/MSDConv_SSFC.py`**: Multi-Scale Dilated Conv + SSFC integration block.
@@ -112,8 +112,5 @@ Edit `train.py` to modify:
 
 ---
 
-### Dataset Loader
-
-The `dataset.py` file implements the `RsDataset` class for loading paired remote sensing images (time t1 and t2) with corresponding change detection labels. It handles data augmentation and preprocessing for training and validation.
 
 
