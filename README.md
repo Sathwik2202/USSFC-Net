@@ -1,6 +1,6 @@
 ## USSFCNet for Remote Sensing Change Detection
 
-This repository implements **USSFCNet**, a U-Net–style Siamese network with **Multi-Scale Dilated Convolution + Self-Statistics Feature Calibration (MSDConv-SSFC)** blocks for binary change detection between two remote sensing images.
+This repository implements **USSFCNet**, a U-Net–style Siamese network with **Multi-Scale Dilated Convolution + Spatial-Spectral Feature Cooperation (MSDConv-SSFC)** blocks for binary change detection between two remote sensing images.
 
 The code is configured for the **LEVIR-CD** dataset (building change detection) but can be adapted to other datasets with the same two-time-step input format.
 
